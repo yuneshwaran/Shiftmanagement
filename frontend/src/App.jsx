@@ -8,7 +8,7 @@ import AppLayout from "./components/AppLayout";
 import WeeklyReview from "./pages/WeeklyReview";
 import AllowanceReport from "./pages/AllowanceReport";
 import Manage from "./components/Manage";
-import AllowanceAnalysis from "./components/AllowanceAnalysis";
+import AllowanceAnalysis from "./pages/AllowanceAnalysis";
 
 function ProtectedRoute({ children, allowedRoles, adminOnly }) {
   const { user, loading, isAuthenticated } = useAuth();
