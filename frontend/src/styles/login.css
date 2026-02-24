@@ -1,0 +1,212 @@
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    160deg,
+    var(--navy),
+    var(--blue)
+  );
+}
+
+.login-card {
+  width: 440px;
+  padding: 2rem 2.4rem;
+  background: linear-gradient(
+    180deg,
+    #ffffff,
+    var(--soft)
+  );
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(15, 40, 84, 0.35);
+}
+
+.login-card h1 {
+  margin: 0 0 1.8rem;
+  font-size:2rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1.3rem;
+}
+
+.login-card input {
+  width: 100%;
+  height: 42px; 
+  padding: 0 42px 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: #e9f4fb;
+  font-size: 0.95rem;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: var(--blue);
+  background: var(--soft);
+}
+
+.input-action {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.input-action:hover {
+  color: var(--navy);
+}
+
+.login-card button.login-btn {
+  width: 100%;
+  height: 42px; /* same as input */
+  margin-top: 0.5rem;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: medium;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.login-card button.login-btn:hover {
+  background: var(--blue);
+  }
+
+.login-footer {
+  margin-top: 1.2rem;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.login-footer span {
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.login-footer span:hover {
+  text-decoration: underline;
+}
+
+
+.login-mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.login-mode-toggle button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+.login-mode-toggle button.active {
+  background: #1e293b;
+  color: #fff;
+  border-color: #1e293b;
+}
+
+/* Reset Password */
+
+
+
+.modal-backdrop {
+
+  background: rgba(15, 40, 84, 0.55);
+  backdrop-filter: blur(4px);
+  justify-content: center;    
+
+  padding: 0px 500px 0px 500px;
+}
+
+.modal-card h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--navy);
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-card input {
+  height: 42px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #f8fafc;
+  transition: 0.2s ease;
+}
+.modal-card label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+}
+
+
+.modal-card input:focus {
+  outline: none;
+  border-color: var(--navy);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(15, 40, 84, 0.12);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.modal-primary {
+  flex: 1;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: var(--navy);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.modal-primary:hover {
+  background: #1e3a8a;
+}
+
+.modal-cancel {
+  flex: 1;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.modal-cancel:hover {
+  background: #e2e8f0;
+}

@@ -1,0 +1,8 @@
+.env
+.env.development
+.venv
+.vscode
+__pycache__
+*.pyc
+.obselete
+node_modules
