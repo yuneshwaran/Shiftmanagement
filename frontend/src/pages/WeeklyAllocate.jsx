@@ -212,7 +212,6 @@ export default function WeeklyAllocate() {
       remove: draftRemove.map((r) => Number(r.allocation_id)),
       approvals,
     };
-    console.log("APPLY PAYLOAD:", payload);
     try {
       await applyBatchAllocations(payload);
 

@@ -16,7 +16,10 @@ export default function AllowanceReport() {
   const [month, setMonth] = useState("2025-01");
   const [shifts, setShifts] = useState([]);
   const [rows, setRows] = useState([]);
-  
+  const grandTotal = rows.reduce(
+    (sum, r) => sum + Number(r.total_allowance || 0),
+    0
+  );
   const [loading, setLoading] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -157,7 +160,38 @@ const handleExport = async () => {
       }
     });
   });
+  /* =========================
+   GRAND TOTAL ROW
+========================== */
 
+const grandTotal = rows.reduce(
+  (sum, r) => sum + Number(r.total_allowance || 0),
+  0
+);
+
+const grandRow = worksheet.addRow([
+  "",
+  "Grand Total",
+  ...Array(shifts.length).fill(""),
+  "",
+  "",
+  grandTotal,
+  ]);
+
+  grandRow.eachCell((cell, colNumber) => {
+    cell.border = {
+      top: { style: "thin" },
+      left: { style: "thin" },
+      bottom: { style: "thin" },
+      right: { style: "thin" },
+    };
+
+    cell.font = { bold: true };
+
+    if (colNumber === totalCol) {
+      cell.numFmt = '"₹"#,##0.00';
+    }
+  });
   /* =========================
      COLUMN WIDTHS
   ========================== */
@@ -296,6 +330,7 @@ const handleExport = async () => {
               ? `${formattedMonth} (${selectedProjectName})`
               : formattedMonth
           }
+          grandTotal={grandTotal} 
         />
       </>
     )}

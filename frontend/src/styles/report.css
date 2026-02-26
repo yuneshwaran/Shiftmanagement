@@ -203,3 +203,20 @@
 .analysis-btn:hover {
   background: #eef2ff;
 }
+
+.grand-total-row {
+  background-color: #c5c9cc;
+  font-weight: 700;
+}
+
+.grand-label {
+  text-align: center;
+  padding-right: 15px;
+  font-size: 14px;
+}
+
+.grand-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e3a8a;
+}

@@ -5,6 +5,7 @@ export default function AllowanceReportTable({
   shifts = [],
   rows = [],
   month,
+  grandTotal = 0,
 }) {
   const [sortBy, setSortBy] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
@@ -78,7 +79,7 @@ export default function AllowanceReportTable({
             </th>
 
             <th onClick={() => handleSort("total_allowance")}>
-              Grand Total
+              Total
             </th>
           </tr>
         </thead>
@@ -99,10 +100,18 @@ export default function AllowanceReportTable({
               <td>{r.holiday_shift_count ?? 0}</td>
 
               <td className="total-cell">
-                ₹ {Number(r.total_allowance ?? 0).toFixed(2)}
+                ₹ {Number(r.total_allowance ?? 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
               </td>
             </tr>
           ))}
+          <tr className="grand-total-row">
+            <td colSpan={2 + shifts.length + 2} className="grand-label">
+              Grand Total
+            </td>
+            <td className="grand-value">
+              ₹ {Number(grandTotal).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

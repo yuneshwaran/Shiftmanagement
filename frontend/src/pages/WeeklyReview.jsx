@@ -33,7 +33,6 @@ export default function WeeklyReview() {
   const loadWeek = async () => {
     const res = await getWeeklyAllocation(selectedProject, from, to);
     setAllocations(res.data || {});
-    console.log("Loaded weekly allocations:", res.data);
   };
 
   return (
@@ -71,10 +70,6 @@ export default function WeeklyReview() {
             onChange={e => setTo(e.target.value)}
           />
         </div>
-
-        {/* <button className="review-refresh" onClick={loadWeek}>
-          Refresh
-        </button> */}
         <img className="refresh-btn" src={refresh} onClick={loadWeek} alt="Refresh" />
       </div>
 

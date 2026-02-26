@@ -212,7 +212,7 @@ const handleAnalyze = async () => {
           <div className="stat-card highlight">
             <span className="stat-label">Total Allowance</span>
             <span className="stat-value">
-              ₹ {Number(summary.total_allowance).toFixed(2)}
+              ₹ {Number(summary.total_allowance).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
             </span>
           </div>
 
@@ -224,7 +224,22 @@ const handleAnalyze = async () => {
           <thead>
             <tr>
               <th>Date</th>
-              <th>Project</th>
+
+              {filterType === "project" && selectionId && (
+                <th>Employee</th>
+              )}
+
+              {filterType === "employee" && selectionId && (
+                <th>Project</th>
+              )}
+
+              {!selectionId && (
+                <>
+                  <th>Project</th>
+                  <th>Employee</th>
+                </>
+              )}
+
               <th>Shift</th>
               <th>Type</th>
               <th>Allowance</th>
@@ -235,7 +250,22 @@ const handleAnalyze = async () => {
             {daily.map((d, idx) => (
               <tr key={idx}>
                 <td>{d.date}</td>
-                <td>{d.project}</td>
+
+                {filterType === "project" && selectionId && (
+                  <td>{d.employee}</td>
+                )}
+
+                {filterType === "employee" && selectionId && (
+                  <td>{d.project}</td>
+                )}
+
+                {!selectionId && (
+                  <>
+                    <td>{d.project}</td>
+                    <td>{d.employee}</td>
+                  </>
+                )}
+
                 <td>{d.shift_code}</td>
                 <td>{d.type}</td>
                 <td>₹ {Number(d.allowance).toFixed(2)}</td>

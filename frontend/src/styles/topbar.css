@@ -165,10 +165,8 @@
   align-items: center;
 }
 
-/* WHITE LOGO BOX */
-/* LOGO WHITE BOX */
 .brand-logo {
-  background: #ffffff;
+  background: #dce5f5;
   padding: 3px 4px;
   border-radius: 2px;
   display: flex;

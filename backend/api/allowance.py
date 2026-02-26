@@ -385,6 +385,7 @@ def employee_allowance_detailed(
             "shift_code": shift_code,
             "type": shift_type,
             "allowance": allowance,
+            "employee": emp_name
         })
 
     return {
