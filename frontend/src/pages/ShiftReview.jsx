@@ -6,7 +6,7 @@ import refresh from "../assets/refresh.png";
 import { useAuth } from "../context/AuthContext";
 import "../styles/review.css";
 
-export default function WeeklyReview() {
+export default function ShiftReview() {
   const { projects, selectedProject, setSelectedProject } = useAuth();
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");

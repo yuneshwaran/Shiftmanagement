@@ -3,9 +3,9 @@ import { useAuth } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import WeeklyAllocate from "./pages/WeeklyAllocate";
+import ShiftAllocate from "./pages/ShiftAllocate";
 import AppLayout from "./components/AppLayout";
-import WeeklyReview from "./pages/WeeklyReview";
+import ShiftReview from "./pages/ShiftReview";
 import AllowanceReport from "./pages/AllowanceReport";
 import Manage from "./components/Manage";
 import AllowanceAnalysis from "./pages/AllowanceAnalysis";
@@ -57,10 +57,10 @@ export default function App() {
           <Route index element={<Dashboard />} />
 
           <Route
-            path="weekly"
+            path="allocate"
             element={
               <ProtectedRoute allowedRoles={["lead"]}>
-                <WeeklyAllocate />
+                <ShiftAllocate />
               </ProtectedRoute>
             }
           />
@@ -69,7 +69,7 @@ export default function App() {
             path="review"
             element={
               <ProtectedRoute allowedRoles={["lead", "employee"]}>
-                <WeeklyReview />
+                <ShiftReview />
               </ProtectedRoute>
             }
           />

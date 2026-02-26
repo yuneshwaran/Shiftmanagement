@@ -18,7 +18,7 @@ export default function TopBar() {
   const getPageTitle = () => {
   const path = location.pathname;
 
-  if (path.includes("/weekly")) return "Weekly Allocation";
+  if (path.includes("/allocate")) return "Shift Allocation";
   if (path.includes("/review")) return "Review Allocation";
   if (path.includes("/manage")) return "Manage Resources";
   if (path.includes("/report")) return "Allowance Report";
@@ -51,8 +51,8 @@ const renderAdminMenu = () => (
   <>
     <div className="dropdown-section">
       <span className="dropdown-title">PLAN SHIFTS</span>
-      <NavLink to="/home/weekly" className="dropdown-link">
-        Weekly Allocation
+      <NavLink to="/home/allocate" className="dropdown-link">
+        Shift Allocation
       </NavLink>
       <NavLink to="/home/review" className="dropdown-link">
         Review Allocation
@@ -88,11 +88,11 @@ const renderLeadMenu = () => (
   <>
     <div className="dropdown-section">
       <span className="dropdown-title">PLAN SHIFTS</span>
-      <NavLink to="/home/weekly" 
+      <NavLink to="/home/allocate" 
       className={({ isActive }) =>
       "dropdown-link" + (isActive ? " active-link" : "")
   }>
-        Weekly Allocation
+        Shift Allocation
       </NavLink>
       <NavLink to="/home/review" className={({ isActive }) =>
     "dropdown-link" + (isActive ? " active-link" : "")

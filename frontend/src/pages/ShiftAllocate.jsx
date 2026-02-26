@@ -2,7 +2,7 @@ import "../styles/weekalloc.css";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
-import WeeklyGrid from "../components/WeeklyGrid";
+import AllocateGrid from "../components/AllocateGrid";
 import { getWeeklyAllocation, applyBatchAllocations } from "../api/shifts.api";
 import { getEmployeesByProject } from "../api/employees.api";
 import { getProjectShifts } from "../api/shifts.api";
@@ -38,7 +38,7 @@ function sortShifts(shifts) {
 
 
 
-export default function WeeklyAllocate() {
+export default function ShiftAllocate() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
@@ -319,7 +319,7 @@ const revertLocalChanges = async () => {
 
 
       <div className="wa-table">
-        <WeeklyGrid
+        <AllocateGrid
           from={from}
           to={to}
           allocations={allocations}

@@ -29,7 +29,7 @@ function splitAllocations(allocations, projectId) {
   return map;
 }
 
-export default function WeeklyGrid({
+export default function AllocateGrid({
   from,
   to,
   allocations,
