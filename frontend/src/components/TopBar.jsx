@@ -68,7 +68,7 @@ const renderAdminMenu = () => (
     </div>
 
     <div className="dropdown-divider" />
-
+    <span className="dropdown-title">ALLOWANCE </span>
     <div className="dropdown-section">
       <NavLink to="/home/report" className="dropdown-link">
         Allowance Report
