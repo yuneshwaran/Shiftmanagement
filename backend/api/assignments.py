@@ -35,6 +35,7 @@ def get_assigned_employees(
         {
             "emp_id": e.emp_id,
             "emp_name": e.emp_name,
+            "emp_lname": e.emp_lname,
         }
         for e in employees
     ]
@@ -65,6 +66,7 @@ def get_available_employees(
         {
             "emp_id": e.emp_id,
             "emp_name": e.emp_name,
+            "emp_lname": e.emp_lname,
         }
         for e in employees
     ]

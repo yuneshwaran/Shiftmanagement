@@ -93,7 +93,8 @@ export default function EmployeesPanel() {
         <thead>
           <tr>
             <th>Emp ID</th>
-            <th>Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Email</th>
             <th>Experienced</th>
             <th>Reporting To</th>
@@ -106,6 +107,7 @@ export default function EmployeesPanel() {
             <tr key={e.emp_id}>
               <td>{e.emp_id}</td>
               <td>{e.emp_name}</td>
+              <td>{e.emp_lname}</td>
               <td>{e.email || "-"}</td>
               <td>{e.is_experienced ? "Yes" : "No"}</td>
 

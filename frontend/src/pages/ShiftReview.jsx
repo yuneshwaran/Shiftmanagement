@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import WeeklyReviewGrid from "../components/WeeklyReviewGrid";
+import ReviewGrid from "../components/ReviewGrid";
 import { getWeeklyAllocation , getProjectShifts } from "../api/shifts.api";
 
 import refresh from "../assets/refresh.png";
@@ -75,7 +75,7 @@ export default function ShiftReview() {
 
       {/* TABLE */}
       <div className="review-wrapper">
-        <WeeklyReviewGrid
+        <ReviewGrid
           from={from}
           to={to}
           allocations={allocations}

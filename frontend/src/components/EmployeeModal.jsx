@@ -5,6 +5,7 @@ import { getLeads } from "../api/employees.api";
 export default function EmployeeModal({ employee, onClose, onSave }) {
   const [empId, setEmpId] = useState(employee?.emp_id || "");
   const [name, setName] = useState(employee?.emp_name || "");
+  const [empLname, setEmpLName] = useState(employee?.emp_lname || "");
   const [email, setEmail] = useState(employee?.email || "");
   const [experienced, setExperienced] = useState(
     employee?.is_experienced || false
@@ -28,6 +29,7 @@ export default function EmployeeModal({ employee, onClose, onSave }) {
     onSave({
       emp_id: Number(empId),
       emp_name: name,
+      emp_lname: empLname,
       email,
       is_experienced: experienced,
       reporting_to: reportingTo || null,
@@ -48,10 +50,17 @@ export default function EmployeeModal({ employee, onClose, onSave }) {
           disabled={!!employee}
         />
 
-        <label>Name</label>
+        <label>First Name</label>
         <input
           value={name}
           onChange={e => setName(e.target.value)}
+          required
+        />
+
+         <label>Last Name</label>
+        <input
+          value={empLname}
+          onChange={e => setEmpLName(e.target.value)}
           required
         />
 

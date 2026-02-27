@@ -187,6 +187,7 @@ def get_weekly_allocation(
             "allocation_id": alloc.allocation_id,
             "emp_id": alloc.emp_id,
             "emp_name": alloc.employee.emp_name,
+            "emp_lname": alloc.employee.emp_lname,
             "project_id": alloc.project_id,
             "is_approved": alloc.is_approved,
         })

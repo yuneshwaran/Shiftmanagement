@@ -102,7 +102,7 @@ export default function AssignmentsPanel() {
             <h4>Available Employees</h4>
             {available.map(e => (
               <div key={e.emp_id} className="emp-row">
-                <span>{e.emp_name}</span>
+                <span>{e.emp_name} {e.emp_lname}  ({e.emp_id})</span>
                 <button onClick={() => assign(e.emp_id)}>+</button>
               </div>
             ))}
@@ -113,7 +113,7 @@ export default function AssignmentsPanel() {
             <h4>Assigned Employees</h4>
             {assigned.map(e => (
               <div key={e.emp_id} className="emp-row">
-                <span>{e.emp_name}</span>
+                <span>{e.emp_name} {e.emp_lname}  ({e.emp_id})</span>
                 <button
                   className="danger"
                   onClick={() => unassign(e.emp_id)}

@@ -122,7 +122,7 @@ export default function WeeklyReviewGrid({
                               key={a.allocation_id}
                               className="review-pill"
                             >
-                              {a.emp_name}
+                              {a.emp_name} {a.emp_lname} ({a.emp_id})
                             </div>
                           ))
                         )}

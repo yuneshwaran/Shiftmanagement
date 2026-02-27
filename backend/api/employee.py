@@ -31,7 +31,8 @@ def create_employee(
 
     emp = Employee(
         emp_id=data.emp_id,
-        emp_name=data.emp_name,     
+        emp_name=data.emp_name, 
+        emp_lname=data.emp_lname,    
         email=data.email,
         is_experienced=data.is_experienced,
         reporting_to=data.reporting_to or lead.emp_id,
@@ -55,6 +56,8 @@ def update_employee(
         raise HTTPException(404, "Employee not found")
 
     emp.emp_name = data.emp_name
+    emp.emp_lname = data.emp_lname
+    emp.email = data.email
     emp.is_experienced = data.is_experienced
     emp.reporting_to = data.reporting_to
     db.commit()
@@ -76,6 +79,7 @@ def list_employees(
         {
             "emp_id": e.emp_id,
             "emp_name": e.emp_name,
+            "emp_lname": e.emp_lname,
             "email": e.email,
             "is_experienced": e.is_experienced,
             "lead_name": leads.get(e.reporting_to),
@@ -116,6 +120,7 @@ def get_employees_by_project(
         {
             "emp_id": e.emp_id,
             "emp_name": e.emp_name,
+            "emp_lname": e.emp_lname,
             "in_project": True,
         }
         for e in employees

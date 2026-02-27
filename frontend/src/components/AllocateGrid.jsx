@@ -286,7 +286,7 @@ const isRowApprovable = date => {
                                   draftHere.has(emp.emp_id)
                                 }
                               >
-                                {emp.emp_name}
+                                {emp.emp_name} ({emp.emp_id})
                               </option>
                             ))}
                           </select>

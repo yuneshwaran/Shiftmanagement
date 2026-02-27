@@ -14,7 +14,7 @@ export default function AllowanceAnalysis() {
 
   const [projects, setProjects] = useState([]);
   const [employees, setEmployees] = useState([]);
-  const [month, setMonth] = useState("2025-01");
+  const [month, setMonth] = useState("");
   const [summary, setSummary] = useState(null);
   const [daily, setDaily] = useState([]);
   const [loading, setLoading] = useState(false);

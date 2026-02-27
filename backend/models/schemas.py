@@ -20,6 +20,7 @@ class ResetPasswordRequest(BaseModel):
 class EmployeeCreateRequest(BaseModel):
     emp_id: int
     emp_name: str
+    emp_lname: str
     email: EmailStr
     is_experienced: bool
     reporting_to: Optional[int] = None
@@ -28,6 +29,7 @@ class EmployeeCreateRequest(BaseModel):
 class EmployeeUpdateRequest(BaseModel):
     emp_id: int
     emp_name: str
+    emp_lname: str
     email: EmailStr
     is_experienced: bool
     reporting_to: Optional[int] = None
@@ -36,6 +38,7 @@ class EmployeeUpdateRequest(BaseModel):
 class EmployeeOut(BaseModel):
     emp_id: int
     emp_name: str
+    emp_lname: str
     email: Optional[str]
     is_experienced: bool
     is_active: bool
@@ -49,12 +52,13 @@ class EmployeeOut(BaseModel):
 class EmployeeInProjectOut(BaseModel):
     emp_id: int
     emp_name: str
+    emp_lname: str
     in_project: bool
 
 class LeadOut(BaseModel):
     lead_id: int
     lead_name: str
-
+    # lead_lname : str
     class Config:
         from_attributes = True
 
@@ -127,6 +131,7 @@ class ShiftView(BaseModel):
 class EmployeeAvailability(BaseModel):
     emp_id: int
     emp_name: str
+    emp_lname: str
     available: bool
     reason: Optional[str] = None
 
@@ -157,6 +162,7 @@ class ReportShiftOut(BaseModel):
 class EmployeeAllowanceRow(BaseModel):
     emp_id: int
     emp_name: str
+    emp_lname: str
     shift_counts: Dict[str, int]
     total_allowance: float
 

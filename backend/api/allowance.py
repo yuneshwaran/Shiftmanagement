@@ -58,6 +58,7 @@ def employee_allowance_report(
         db.query(
             ShiftAllocation.emp_id,
             Employee.emp_name,
+            Employee.emp_lname,
             ShiftAllocation.shift_code,
             ShiftAllocation.shift_date,
         )
@@ -74,7 +75,7 @@ def employee_allowance_report(
 
     report = {}
 
-    for emp_id, emp_name, shift_code, shift_date in allocations:
+    for emp_id, emp_name, emp_lname, shift_code, shift_date in allocations:
 
         shift = shift_map.get(shift_code)
         if not shift:
@@ -83,6 +84,7 @@ def employee_allowance_report(
         emp = report.setdefault(emp_id, {
             "emp_id": emp_id,
             "emp_name": emp_name,
+            "emp_lname": emp_lname,
             "shift_counts": {},
             "weekend_shift_count": 0,
             "holiday_shift_count": 0,
@@ -175,6 +177,7 @@ def employee_allowance_report_aggregate(
         db.query(
             ShiftAllocation.emp_id,
             Employee.emp_name,
+            Employee.emp_lname,
             ShiftAllocation.shift_code,
             ShiftAllocation.shift_date,
         )
@@ -193,7 +196,7 @@ def employee_allowance_report_aggregate(
     report = {}
     seen_shifts = set()   # 🔥 Deduplication set
 
-    for emp_id, emp_name, shift_code, shift_date in allocations:
+    for emp_id, emp_name, emp_lname, shift_code, shift_date in allocations:
 
         unique_key = (emp_id, shift_date, shift_code)
         if unique_key in seen_shifts:
@@ -207,6 +210,7 @@ def employee_allowance_report_aggregate(
         emp = report.setdefault(emp_id, {
             "emp_id": emp_id,
             "emp_name": emp_name,
+            "emp_lname": emp_lname,
             "shift_counts": {},
             "weekend_shift_count": 0,
             "holiday_shift_count": 0,
@@ -306,7 +310,8 @@ def employee_allowance_detailed(
     query = (
         db.query(
             ShiftAllocation.emp_id,
-            Employee.emp_name,
+            Employee.emp_name,            
+            Employee.emp_lname,
             ShiftAllocation.shift_code,
             ShiftAllocation.shift_date,
             ShiftAllocation.project_id,
@@ -344,7 +349,7 @@ def employee_allowance_detailed(
 
     daily = []
 
-    for emp_id_val, emp_name, shift_code, shift_date, proj_id in allocations:
+    for emp_id_val, emp_name, emp_lname, shift_code, shift_date, proj_id in allocations:
 
         unique_key = (emp_id_val, shift_date, shift_code)
         if unique_key in seen:
@@ -391,6 +396,8 @@ def employee_allowance_detailed(
     return {
         "employee": {
             "emp_id": emp_id,
+            "emp_name": emp_name,
+            "emp_lname": emp_lname,
         } if emp_id else None,
         "summary": summary,
         "daily": sorted(daily, key=lambda x: x["date"]),
@@ -407,6 +414,7 @@ def get_employees_for_report(
         db.query(
             Employee.emp_id,
             Employee.emp_name,
+            Employee.emp_lname,
             Project.project_id,
             Project.name.label("project_name"),
         )
@@ -419,12 +427,13 @@ def get_employees_for_report(
 
     results = query.all()
 
+    full_name = f"{emp_name} {emp_lname }".strip()
     employees = {}
 
-    for emp_id, emp_name, proj_id, proj_name in results:
+    for emp_id, emp_name, emp_lname, proj_id, proj_name in results:
         emp = employees.setdefault(emp_id, {
             "emp_id": emp_id,
-            "emp_name": emp_name,
+            "emp_name": full_name,
             "projects": []
         })
 
