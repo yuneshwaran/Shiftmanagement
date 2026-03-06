@@ -140,7 +140,10 @@ export default function ProjectsPanel() {
                   alt="Edit"
                   className="action-icon"
                   onClick={() => {
-                    setEditing(p);
+                    setEditing({
+                      ...p,
+                      lead_ids: p.leads?.map(l => l.lead_id) || []
+                    });
                     setOpen(true);
                   }}
                 />
@@ -150,14 +153,6 @@ export default function ProjectsPanel() {
                   className="action-icon"
                   onClick={() => handleDeactivate(p.project_id)}
                 />
-                {/* {p.is_active && (
-                  <button
-                    className="danger-btn"
-                    onClick={() => handleDeactivate(p.project_id)}
-                  >
-                    Deactivate
-                  </button>
-                )} */}
               </td>
             </tr>
           ))}
