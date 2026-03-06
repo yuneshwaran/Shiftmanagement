@@ -6,6 +6,35 @@ from sqlalchemy.orm import relationship
 from models.database import Base
 import datetime
 
+class User(Base):
+    __tablename__ = "user"
+
+    user_id = Column(Integer, primary_key=True, autoincrement=True)
+
+    first_name = Column(String(50), nullable=False)
+    last_name = Column(String(50))
+
+    email = Column(String(50), unique=True, nullable=False)
+    passhash = Column(String(255))
+
+    role = Column(String(20), nullable=False)  
+    # admin | lead | employee
+
+    reporting_to = Column(
+        Integer,
+        ForeignKey("user.user_id"),
+        nullable=True
+    )
+
+    is_active = Column(Boolean, default=True)
+
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    manager = relationship(
+        "User",
+        remote_side=[user_id],
+        backref="team_members"
+    )
 
 class ProjectLead(Base):
     __tablename__ = "project_lead"
@@ -53,7 +82,7 @@ class Project(Base):
 
     project_id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
-
+    team_name = Column(String(100), nullable=False)
     is_active = Column(Boolean, default=True)
 
     last_updated = Column(

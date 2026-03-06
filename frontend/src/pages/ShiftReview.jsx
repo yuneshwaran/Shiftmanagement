@@ -2,14 +2,26 @@ import { useEffect, useState } from "react";
 import ReviewGrid from "../components/ReviewGrid";
 import { getWeeklyAllocation , getProjectShifts } from "../api/shifts.api";
 
-import refresh from "../assets/refresh.png";
 import { useAuth } from "../context/AuthContext";
 import "../styles/review.css";
 
 export default function ShiftReview() {
+
+  const getMonthStart = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,"0")}-01`;
+  };
+
+  const getMonthEnd = () => {
+    const d = new Date();
+    const last = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+    return `${last.getFullYear()}-${String(last.getMonth() + 1).padStart(2,"0")}-${String(last.getDate()).padStart(2,"0")}`;
+  };
+
+  const [from, setFrom] = useState(getMonthStart);
+  const [to, setTo] = useState(getMonthEnd);
+
   const { projects, selectedProject, setSelectedProject } = useAuth();
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
   const [shifts, setShifts] = useState([]);
   const [allocations, setAllocations] = useState({});
 
@@ -70,7 +82,6 @@ export default function ShiftReview() {
             onChange={e => setTo(e.target.value)}
           />
         </div>
-        <img className="refresh-btn" src={refresh} onClick={loadWeek} alt="Refresh" />
       </div>
 
       {/* TABLE */}

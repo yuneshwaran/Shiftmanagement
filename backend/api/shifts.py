@@ -27,7 +27,7 @@ router = APIRouter(
 ist = pytz.timezone('Asia/Kolkata') 
 
 @router.get("/masters")
-def get_project_shifts(
+def get_shifts(
     project_id: int,
     on_date: date | None = None,
     db: Session = Depends(get_db),
@@ -113,7 +113,7 @@ def get_weekly_allocation(
     else:
         raise HTTPException(403, "Unauthorized user")
     
-    print("USER TYPE:", type(user))
+    # print("USER TYPE:", type(user))
     
     allocations = (
         db.query(ShiftAllocation)
@@ -127,12 +127,12 @@ def get_weekly_allocation(
         )
         .all()
     )
-    for alloc in allocations:
-            print(
-                "DATE:", alloc.shift_date,
-                "APPROVED:", alloc.is_approved,
-                "APPROVED_BY:", alloc.approved_by
-            )
+    # for alloc in allocations:
+            # print(
+            #     "DATE:", alloc.shift_date,
+            #     "APPROVED:", alloc.is_approved,
+            #     "APPROVED_BY:", alloc.approved_by
+            # )
     holidays = (
         db.query(ProjectHoliday)
         .filter(

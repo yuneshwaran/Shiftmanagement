@@ -97,6 +97,7 @@ export default function ProjectsPanel() {
         <thead>
           <tr>
             <th>Project Name</th>
+            <th>Team</th>
             <th>Lead</th>
             <th>Status</th>
             <th>Actions</th>
@@ -108,7 +109,14 @@ export default function ProjectsPanel() {
             <tr key={p.project_id}>
 
               <td>{p.name}</td>
-              
+
+              {p.team_name ? (
+                <td>{p.team_name}</td>
+              ) : (
+                <td > - </td>
+              )
+
+              }
               <td>
                 {p.leads && p.leads.length > 0 ? (
                   p.leads.map(l => l.name).join(", ")

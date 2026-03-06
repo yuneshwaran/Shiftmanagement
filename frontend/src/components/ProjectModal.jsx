@@ -8,15 +8,18 @@ export default function ProjectModal({
   onSave,
 }) {
   const [name, setName] = useState("");
+  const [team_name, setTeamName] = useState("");
   const [leadIds, setLeadIds] = useState([]);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (project) {
       setName(project.name || "");
-      setLeadIds(project.lead_ids || []);
+      setTeamName(project.team_name || "");
+      setLeadIds((project.lead_ids || []).map(Number));
     } else {
       setName("");
+      setTeamName("");
       setLeadIds([]);
     }
   }, [project]);
@@ -32,12 +35,14 @@ export default function ProjectModal({
   const submit = async (e) => {
     e.preventDefault();
     if (!name.trim()) return;
+    if (!team_name.trim().toUpperCase()) return;
     if (!leadIds.length) return alert("Select at least one lead");
 
     setSaving(true);
     try {
       await onSave({
         name: name.trim(),
+        team_name: team_name.trim(),
         lead_ids: leadIds,
         is_active: project ? project.is_active : true,
       });
@@ -67,6 +72,15 @@ export default function ProjectModal({
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter project name"
+          required
+          autoFocus
+        />
+        {/* Team Name */}
+        <label>Team</label>
+        <input
+          value={team_name}
+          onChange={(e) => setTeamName(e.target.value)}
+          placeholder="Enter Team name"
           required
           autoFocus
         />

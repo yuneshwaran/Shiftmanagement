@@ -64,13 +64,14 @@ class LeadOut(BaseModel):
 
 class ProjectCreateRequest(BaseModel):
     name: str
+    team_name: str 
     lead_ids: list[int]
 
 class ProjectUpdateRequest(BaseModel):
     name: str
+    team_name: str
     is_active: bool
     lead_ids: list[int]
-
 
 
 class ProjectShiftCreateRequest(BaseModel):

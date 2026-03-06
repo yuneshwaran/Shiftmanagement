@@ -39,6 +39,7 @@ def list_projects(db: Session = Depends(get_db)):
         result.append({
             "project_id": p.project_id,
             "name": p.name,
+            "team_name": p.team_name.upper(),
             "is_active": p.is_active,
             "leads": [
                 {
@@ -64,6 +65,7 @@ def create_project(
     project = Project(
         name=data.name,
         is_active=True,
+        team_name = data.team_name.upper()
     )
     db.add(project)
     db.flush()  
@@ -95,6 +97,7 @@ def update_project(
 
     project.name = data.name
     project.is_active = data.is_active
+    project.team_name = data.team_name.upper()
 
     db.query(ProjectLeadAssignment).filter(
         ProjectLeadAssignment.project_id == project_id

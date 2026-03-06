@@ -39,8 +39,20 @@ function sortShifts(shifts) {
 
 
 export default function ShiftAllocate() {
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+
+    const getMonthStart = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,"0")}-01`;
+  };
+
+  const getMonthEnd = () => {
+    const d = new Date();
+    const last = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+    return `${last.getFullYear()}-${String(last.getMonth() + 1).padStart(2,"0")}-${String(last.getDate()).padStart(2,"0")}`;
+  };
+
+  const [from, setFrom] = useState(getMonthStart);
+  const [to, setTo] = useState(getMonthEnd);
 
   const [employees, setEmployees] = useState([]);
   const [allocations, setAllocations] = useState({});

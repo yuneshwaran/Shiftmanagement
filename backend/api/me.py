@@ -26,13 +26,26 @@ def get_my_context(
         if user.is_admin:
             projects = db.query(Project).filter(Project.is_active == True).all()
         else:
-            projects = (
+
+            assigned_projects = (
                 db.query(Project)
                 .join(ProjectLeadAssignment)
                 .filter(
                     ProjectLeadAssignment.lead_id == user.lead_id,
                     Project.is_active == True,
                 )
+                .all()
+            )
+
+            team_names = {p.team_name for p in assigned_projects}
+
+            projects = (
+                db.query(Project)
+                .filter(
+                    Project.team_name.in_(team_names),
+                    Project.is_active == True
+                )
+                .order_by(Project.name)
                 .all()
             )
 
@@ -54,7 +67,7 @@ def get_my_context(
     # EMPLOYEE CONTEXT
     elif isinstance(user, Employee):
 
-        projects = (
+        assigned_projects = (
             db.query(Project)
             .join(ProjectEmployee)
             .filter(
@@ -64,6 +77,26 @@ def get_my_context(
             .all()
         )
 
+        if not assigned_projects:
+            return {
+                "user_type": "employee",
+                "emp_id": user.emp_id,
+                "name": user.emp_name,
+                "projects": [],
+                "default_project_id": None,
+            }
+
+        team_names = {p.team_name for p in assigned_projects}
+
+        projects = (
+            db.query(Project)
+            .filter(
+                Project.team_name.in_(team_names),
+                Project.is_active == True,
+            )
+            .order_by(Project.name)
+            .all()
+        )
         return {
             "user_type": "employee",
             "emp_id": user.emp_id,
@@ -79,32 +112,3 @@ def get_my_context(
         }
 
     return {}
-
-@router.get("/employee-context")
-def get_employee_context(
-    db: Session = Depends(get_db),
-    employee=Depends(get_current_employee),  
-):
-    projects = (
-        db.query(Project)
-        .join(ProjectEmployee)
-        .filter(ProjectEmployee.emp_id == employee.emp_id)
-        .order_by(Project.name)
-        .all()
-    )
-
-    if not projects:
-        raise HTTPException(404, "No projects assigned")
-
-    return {
-        "emp_id": employee.emp_id,
-        "emp_name": employee.emp_name,
-        "projects": [
-            {
-                "project_id": p.project_id,
-                "name": p.name,
-            }
-            for p in projects
-        ],
-        "default_project_id": projects[0].project_id,
-    }

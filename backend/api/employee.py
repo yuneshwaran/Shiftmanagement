@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session, joinedload
 from models.database import get_db
+from api.auth import hash_password
 from models.models import ProjectLead as ProjectLeadModel, Employee, ProjectLead,ProjectEmployee
 from api.dependencies import get_current_lead, get_project_or_403
 from models.schemas import (
@@ -28,12 +29,15 @@ def create_employee(
             status_code=400,
             detail="Employee ID already exists"
         )
-
+    
+    raw_password = f"{data.emp_id}{data.emp_name.lower()}"
+    hashed_password = hash_password(raw_password)
     emp = Employee(
         emp_id=data.emp_id,
         emp_name=data.emp_name, 
         emp_lname=data.emp_lname,    
         email=data.email,
+        passhash=hashed_password,
         is_experienced=data.is_experienced,
         reporting_to=data.reporting_to or lead.emp_id,
     )

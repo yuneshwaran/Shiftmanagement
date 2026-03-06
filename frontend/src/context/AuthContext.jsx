@@ -36,10 +36,7 @@ export function AuthProvider({ children }) {
     return;
   }
 
-  const contextEndpoint =
-    decoded.user_type === "employee"
-      ? "/me/employee-context"
-      : "/me/context";
+  const contextEndpoint = "/me/context";
 
   api
     .get(contextEndpoint)
