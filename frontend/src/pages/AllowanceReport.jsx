@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllowanceReport} from "../api/allowance.api";
 import { useAuth } from "../context/AuthContext";
@@ -11,9 +11,14 @@ import refresh from "../assets/refresh.png";
 
 
 export default function AllowanceReport() {
-  const { projects, selectedProject, setSelectedProject } = useAuth();
 
-  const [month, setMonth] = useState("2025-01");
+  const getCurrentMonth = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+};
+
+  const [month, setMonth] = useState(getCurrentMonth());
+  const { projects, selectedProject, setSelectedProject } = useAuth();
   const [shifts, setShifts] = useState([]);
   const [rows, setRows] = useState([]);
   const grandTotal = rows.reduce(
@@ -249,7 +254,11 @@ const grandRow = worksheet.addRow([
       setLoading(false);
     }
   };
-
+useEffect(() => {
+  if (month) {
+    handleLoad();
+  }
+}, [month]);
   const navigate = useNavigate();
   return (
     <div className="report-container">

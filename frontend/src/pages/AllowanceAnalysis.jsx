@@ -7,6 +7,10 @@ import "../styles/analysis.css";
 
 export default function AllowanceAnalysis() {
 
+  const getCurrentMonth = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+  };
   const navigate = useNavigate();
 
   const [filterType, setFilterType] = useState("project"); 
@@ -14,7 +18,7 @@ export default function AllowanceAnalysis() {
 
   const [projects, setProjects] = useState([]);
   const [employees, setEmployees] = useState([]);
-  const [month, setMonth] = useState("");
+  const [month, setMonth] = useState(getCurrentMonth());
   const [summary, setSummary] = useState(null);
   const [daily, setDaily] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -103,6 +107,12 @@ const handleAnalyze = async () => {
     setLoading(false);
   }
 };
+
+useEffect(() => {
+  if (month) {
+    handleAnalyze();
+  }
+}, [month]);
 
   return (
     <div className="report-container">

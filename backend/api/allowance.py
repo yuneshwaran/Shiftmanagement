@@ -427,10 +427,12 @@ def get_employees_for_report(
 
     results = query.all()
 
-    full_name = f"{emp_name} {emp_lname }".strip()
+    
     employees = {}
 
     for emp_id, emp_name, emp_lname, proj_id, proj_name in results:
+        
+        full_name = f"{emp_name} {emp_lname }".strip()
         emp = employees.setdefault(emp_id, {
             "emp_id": emp_id,
             "emp_name": full_name,
